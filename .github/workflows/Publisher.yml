@@ -30,16 +30,12 @@ jobs:
 
     - name: Build Golang Images
       run: |
-        docker build . --target XII --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.0
-        docker build . --target XII.I --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.1
-        docker build . --target XII.II --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.2
-        docker build . --target XII.III --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.3
+        docker build . --target XXI --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21
+        docker build . --target XXII --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.22
         docker build . --target latest --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
 
     - name: Publish Golang Images
       run: |
-        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.0
-        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.1
-        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.2
-        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.3
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.22
         docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
