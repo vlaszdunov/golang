@@ -1,0 +1,45 @@
+name: build and push
+run-name: Build and push Python images to GHCR
+
+on:
+  push:
+  schedule:
+    - cron: 0 0 * * *
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-publish:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{env.REGISTRY}}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Python Images
+      run: |
+        docker build . --target XII --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.0
+        docker build . --target XII.I --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.1
+        docker build . --target XII.II --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.2
+        docker build . --target XII.III --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.3
+        docker build . --target latest --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
+
+    - name: Publish Python Images
+      run: |
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.0
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.1
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.2
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.3
+        docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
