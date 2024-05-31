@@ -1,5 +1,5 @@
 name: build and push
-run-name: Build and push Python images to GHCR
+run-name: Build and push Golang images to GHCR
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build Python Images
+    - name: Build Golang Images
       run: |
         docker build . --target XII --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.0
         docker build . --target XII.I --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.1
@@ -36,7 +36,7 @@ jobs:
         docker build . --target XII.III --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.3
         docker build . --target latest --tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
 
-    - name: Publish Python Images
+    - name: Publish Golang Images
       run: |
         docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.0
         docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:1.21.1

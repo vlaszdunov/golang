@@ -1,12 +1,14 @@
-# Python Docker Images
+# Golang Docker Images
 
 Avaliable Versions
-| Python 3.10 | Python 3.11 | Python 3.12 | Python latest |
-|-------------|-------------|-------------|---------------|
+| Golang 1.21 | Golang 1.21.1 | Golang 1.21.2 | Golang 1.21.3 |
+|Golang latest|---------------|---------------|---------------|
 
 ### Using as base image
+
 If you want to use this images as Base image in your Dockerfile\
 you need to paste this instruction into Dockerfile:
+
 ```Dockerfile
-FROM ghcr.io/vlaszdunov/python:replace-with-specific-version
+FROM ghcr.io/vlaszdunov/golang:replace-with-specific-version
 ```
