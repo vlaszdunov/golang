@@ -1,9 +1,8 @@
 # Golang Docker Images
 
 Avaliable Versions
-| Golang latest | Golang 1.21.3 | Golang 1.21.2 | Golang 1.21.1 |
-|-------------|---------------|---------------|---------------|
-| Golang 1.21 ||||
+| Golang latest | Golang 1.22 | Golang 1.21 |
+|-|-|-|
 
 
 ### Using as base image
